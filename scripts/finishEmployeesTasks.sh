@@ -2,7 +2,7 @@ employees=("karen" "mary" "bill" "jim" "lisa" "anton" "john")
 for employee in ${employees[@]};  do
 	echo "Handling tasks for employee $employee"
 	auth="$employee:kieserver1!"
-	evaluation=$((5 + RANDOM % 5))
+	evaluation=$((4 + RANDOM % 7))
 	taskId=`curl -X GET -u ''$auth'' "http://localhost:8080/kie-server/services/rest/server/queries/tasks/instances/owners?status=Reserved" -H "accept: application/json" --silent| jq -r '."task-summary"[0]."task-id"'`
 	
 	if [ "$taskId" != "null" ]
