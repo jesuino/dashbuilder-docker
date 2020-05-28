@@ -2,7 +2,7 @@
 # Start Processes
 ./startEvaluations.sh &
 
-sleep 15
+sleep 5
 
 # Start finishing Employee tasks
 ./finishEmployeesTasks.sh  &
