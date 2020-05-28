@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  kie-server:
+    build: ./../custom_images/kie-server
+    ports: 
+     - 8080:8080
+  evaluation-dashboard:
+    build: ./../custom_images/evaluation-dashboard
+    depends_on:
+      - kie-server
+    ports: 
+     - 8180:8380

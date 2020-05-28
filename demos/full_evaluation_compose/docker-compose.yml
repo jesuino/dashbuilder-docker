@@ -2,23 +2,23 @@ version: '3'
 
 services:
   kie-server:
-    build: ./kie-server
+    build: ./../custom_images/kie-server
     ports: 
      - 8080:8080
   dashbuilder-authoring:
-    build: ./dashbuilder-authoring
+    build: ./../custom_images/dashbuilder-authoring
     depends_on:
       - kie-server
     ports: 
      - 8180:8180
   dashbuilder-runtime:
-    build: ./dashbuilder-runtime
+    build: ./../custom_images/dashbuilder-runtime
     depends_on:
       - kie-server
     ports: 
      - 8280:8280
   evaluation-dashboard:
-    build: ./evaluation-dashboard
+    build: ./../custom_images/evaluation-dashboard
     depends_on:
       - kie-server
     ports: 
