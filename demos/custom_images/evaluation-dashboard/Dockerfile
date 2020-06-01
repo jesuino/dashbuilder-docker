@@ -3,8 +3,8 @@ FROM quay.io/wsiqueir/dashbuilder-runtime
 # Custom Configuration
 ADD ./conf/standalone-demo.xml /opt/jboss/wildfly/standalone/configuration
 
-# Custom Configuration
-ADD ./evaluation_dashboard.zip /opt/jboss/
+# Add Dashboard
+COPY dashboard.zip /opt/jboss/dashboard.zip
 
 # Users
 ADD ./conf/application-users.properties /opt/jboss/wildfly/standalone/configuration/

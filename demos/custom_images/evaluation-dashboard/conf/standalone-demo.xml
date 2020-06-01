@@ -50,7 +50,7 @@
 	<property name="org.dashbuilder.kieserver.serverTemplate.sample_kie_server.replace_query" value="true"/>
 
 	<!-- Import Dashboard -->
-	<property name="dashbuilder.runtime.import" value="/opt/jboss/evaluation_dashboard.zip"/>
+	<property name="dashbuilder.runtime.import" value="/opt/jboss/dashboard.zip"/>
     </system-properties>
 
     <management>
