@@ -1,4 +1,4 @@
-FROM jboss/kie-server
+FROM jboss/kie-server:7.40.0.Final
 
 # Custom Configuration
 ADD ./conf/standalone-demo.xml /opt/jboss/wildfly/standalone/configuration

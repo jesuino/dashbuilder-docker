@@ -1,4 +1,4 @@
-FROM jboss/wildfly:18.0.1.Final 
+FROM jboss/wildfly:19.1.0.Final 
 
 ADD dashbuilder-webapp.war /opt/jboss/wildfly/standalone/deployments/
 

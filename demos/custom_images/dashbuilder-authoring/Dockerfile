@@ -1,4 +1,4 @@
-FROM quay.io/wsiqueir/dashbuilder-webapp
+FROM quay.io/wsiqueir/dashbuilder-webapp:latest
 
 # Custom Configuration
 ADD ./conf/standalone-demo.xml /opt/jboss/wildfly/standalone/configuration
