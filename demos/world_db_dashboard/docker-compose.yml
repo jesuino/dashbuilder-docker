@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  db:
+    image: "mariadb:10.1.45"
+    environment:
+      - MYSQL_DATABASE=world
+      - MYSQL_ROOT_PASSWORD=admin
+    volumes:
+      - ./sql_scripts/:/docker-entrypoint-initdb.d/:z
+    ports:
+      - 3306:3306
+  dashbuilder_authoring:
+    image: "quay.io/wsiqueir/dashbuilder-webapp:latest"
+    environment:
+      - DB_CONNECTION_URL=jdbc:mariadb://db:3306/world
+      - DB_USER=root
+      - DB_PASSWORD=admin
+    volumes:
+      - ./overlay/modules/system/layers/base/org/mariadb/main/:/opt/jboss/wildfly/modules/system/layers/base/org/mariadb/main:z
+      - ./overlay/standalone/configuration/:/opt/jboss/wildfly/standalone/configuration:z
+    ports:
+      - 8080:8080
+    depends_on:
+      - db        
+  dashbuilder_runtime:
+    build: "./../custom_images/dashbuilder-runtime"
+    environment:
+      - DB_CONNECTION_URL=jdbc:mariadb://db:3306/world
+      - DB_USER=root
+      - DB_PASSWORD=admin
+    volumes:
+      - ./overlay/modules/system/layers/base/org/mariadb/main/:/opt/jboss/wildfly/modules/system/layers/base/org/mariadb/main:z
+      - ./overlay/standalone/configuration/:/opt/jboss/wildfly/standalone/configuration:z
+      - ./overlay/dashbuilder/models:/tmp/dashbuilder/models:z
+    ports:
+      - 8280:8280
+    depends_on:
+      - db        
