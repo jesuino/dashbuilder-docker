@@ -10,4 +10,7 @@ ADD ./conf/application-roles.properties /opt/jboss/wildfly/standalone/configurat
 # Kie Server Container 
 ADD ./conf/sample_kie_server.xml /opt/jboss/wildfly/
 
+# Adding repository with evaluation container
+ADD ./repository /opt/jboss/.m2/repository
+
 CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-c", "standalone-demo.xml"]

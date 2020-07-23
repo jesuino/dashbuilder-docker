@@ -3,6 +3,8 @@ version: '3'
 services:
   kie-server-evaluation:
     build: ./../custom_images/kie-server-evaluation
+    environment:
+      - JAVA_OPTS=-Xms1g -Xmx1g -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true  -Djboss.modules.system.pkgs=$JBOSS_MODULES_SYSTEM_PKGS -Djava.awt.headless=true
     ports: 
      - 8080:8080
   evaluation-dashboard:

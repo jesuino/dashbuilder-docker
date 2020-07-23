@@ -13,9 +13,9 @@
     <container>
       <containerId>evaluation</containerId>
       <releaseId>
-        <groupId>org.kie.workbench.playground</groupId>
+        <groupId>evaluation</groupId>
         <artifactId>evaluation</artifactId>
-        <version>7.37.0.Final</version>
+        <version>1.0.0</version>
       </releaseId>
       <status>STARTED</status>
       <configItems/>
