@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  kie-server-evaluation:
+    build: ./../custom_images/kie-server-evaluation
+    environment:
+      - JAVA_OPTS=-Xms1g -Xmx1g -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true  -Djboss.modules.system.pkgs=$JBOSS_MODULES_SYSTEM_PKGS -Djava.awt.headless=true
+    ports: 
+     - 8080:8080
+  dashbuilder-authoring:
+    build: ./../custom_images/dashbuilder-authoring
+    volumes:
+      - ./components:/tmp/dashbuilder/components:z
+    depends_on:
+      - kie-server-evaluation
+    ports: 
+     - 8180:8180
+  dashbuilder-runtime:
+    build: ./../custom_images/dashbuilder-runtime
+    depends_on:
+      - kie-server-evaluation
+    environment:
+      # for a fixed model use:
+      # -Ddashbuilder.runtime.import=/tmp/dashbuilder/models/dashboard.zip
+      - JAVA_OPTS=$JAVA_OPTS -Ddashbuilder.runtime.multi=true -Ddashbuilder.components.external.dir=/tmp/runtime/components
+    volumes:
+      - ./models:/tmp/dashbuilder/models:z
+      - ./components:/tmp/dashbuilder/components:z
+    ports: 
+     - 8280:8280
