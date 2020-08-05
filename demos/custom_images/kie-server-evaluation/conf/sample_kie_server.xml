@@ -21,5 +21,16 @@
       <configItems/>
       <messages/>
     </container>
+    <container>
+      <containerId>mortgage</containerId>
+      <releaseId>
+        <groupId>mortgage-process</groupId>
+        <artifactId>mortgage-process</artifactId>
+        <version>1.0.0</version>
+      </releaseId>
+      <status>STARTED</status>
+      <configItems/>
+      <messages/>
+    </container>
   </containers>
 </kie-server-state>

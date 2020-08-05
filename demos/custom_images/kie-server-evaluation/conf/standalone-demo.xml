@@ -46,7 +46,10 @@
         <!-- Demo Kie Server configuration -->
         <property name="org.kie.server.id" value="sample_kie_server"/>
         <property name="org.kie.server.repo" value="/opt/jboss/wildfly/"/>
-        <property name="org.kie.server.persistence.ds" value="java:jboss/datasources/jBPMDS"/>
+	<property name="org.kie.server.persistence.ds" value="java:jboss/datasources/jBPMDS"/>
+	<!-- Makes possibly to users with the group below claims all tasks -->
+	<property name="org.jbpm.ht.admin.group" value="process-admin"/>
+
     </system-properties>
     <management>
         <security-realms>

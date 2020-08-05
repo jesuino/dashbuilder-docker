@@ -14,7 +14,7 @@ do
 	hr=${HRs[i]}
 	auth="$hr:kieserver1!"
 	echo "Select $hr to complete HR task"
-	evaluation=$((6 + RANDOM % 5))
+	evaluation=$((2 + RANDOM % 10))
 
 	taskId=`curl -X GET -u ''$auth'' "http://localhost:8080/kie-server/services/rest/server/queries/tasks/instances/pot-owners" -H "accept: application/json" --silent| jq -r '."task-summary"[0]."task-id"'`
 	echo "	Task ID: $taskId"

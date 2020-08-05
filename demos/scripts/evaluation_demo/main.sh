@@ -7,8 +7,11 @@ sleep 5
 # Start finishing Employee tasks
 ./finishEmployeesTasks.sh  &
 
-sleep 10
+sleep 5
 
 # Finish PM and HR tasks
 ./finishPMTasks.sh  &
+
+sleep 3
+
 ./finishHRTasks.sh  &
