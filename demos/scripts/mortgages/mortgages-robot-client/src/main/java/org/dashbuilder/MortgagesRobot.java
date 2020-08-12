@@ -116,7 +116,7 @@ public class MortgagesRobot {
                 completedTasks = true;
             }
         }
-        System.out.println("Process ");
+        System.out.println("Process final approval: " + piid);
         // complete is slower than usual
         tasksComplete(piid, emptyMap(), 2000);
         iteractionSleep();
