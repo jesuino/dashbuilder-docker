@@ -22,7 +22,7 @@ services:
     environment:
       # for a fixed model use:
       # -Ddashbuilder.runtime.import=/tmp/dashbuilder/models/dashboard.zip
-      - JAVA_OPTS=$JAVA_OPTS -Ddashbuilder.runtime.multi=true -Ddashbuilder.components.dir=/tmp/runtime/components
+      - JAVA_OPTS=$JAVA_OPTS -Ddashbuilder.runtime.multi=true -Ddashbuilder.components.dir=/tmp/runtime/components -Ddashbuilder.components.enable=true
     volumes:
       - ./models:/tmp/dashbuilder/models:z
     ports: 

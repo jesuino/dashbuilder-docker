@@ -47,7 +47,8 @@
         <property name="dashbuilder.kieserver.serverTemplate.sample_kie_server.location" value="http://kie-server-evaluation:8080/kie-server/services/rest/server"/>
         <property name="dashbuilder.kieserver.serverTemplate.sample_kie_server.user" value="kieserver"/>
         <property name="dashbuilder.kieserver.serverTemplate.sample_kie_server.password" value="kieserver1!"/>
-        <property name="dashbuilder.kieserver.serverTemplate.sample_kie_server.replace_query" value="true"/>
+	<property name="dashbuilder.kieserver.serverTemplate.sample_kie_server.replace_query" value="true"/>
+	<property name="dashbuilder.components.enable" value="true"/>
     </system-properties>
 
     <management>
