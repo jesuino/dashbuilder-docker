@@ -23,7 +23,7 @@ In this directory run `podman-compose up -d` and it will start all the pieces fo
 #### Accessing each server:
 
 * Kie Server: `localhost:8080/kie-server/docs`  - user `kieserver:kieserver1!`
-* Dashbuilder WebApp: `localhost:8180/dashbuilder-webapp` - user `admin/admin`
+* Business Central: `localhost:8080/business-central` - user `krisv/krisv`
 * Dashbuilder Runtime: `localhost:8280/` - user `admin/admin`
 
 To see some action access Evaluation Dashboard, then "Evaluation Progress" page and run `demos/scripts/evaluation_demo/main.sh`. It will start and complete 7 evaluation that can be followed in real time.
