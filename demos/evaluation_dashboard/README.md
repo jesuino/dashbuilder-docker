@@ -3,7 +3,7 @@ Evaluation Dashboard Demo
 
 This demo starts all custom images to play with Kie Server and Dashbuilder.
 
-![Demo Containers](./demo.jpg)
+![Demo Containers](./dashbuilder_evaluation_demo.png)
 
 
 ### Demo
