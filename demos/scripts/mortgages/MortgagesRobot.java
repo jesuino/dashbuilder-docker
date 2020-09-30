@@ -1,4 +1,6 @@
-package org.dashbuilder;
+//usr/bin/env jbang "$0" "$@" ; exit $?
+//DEPS org.kie.server:kie-server-client:7.41.0.Final mortgage-process:mortgage-process:1.0.0 
+//JAVA 11
 
 import java.util.HashSet;
 import java.util.List;
@@ -46,8 +48,9 @@ public class MortgagesRobot {
     private static final UserTaskServicesClient tasksClient;
 
     static {
-        final KieServicesConfiguration conf = newRestConfiguration(URL, USER, PASSWORD);
         Set<Class<?>> extraClasses = new HashSet<>();
+        var conf = newRestConfiguration(URL, USER, PASSWORD);
+        
         extraClasses.add(Application.class);
         extraClasses.add(Applicant.class);
         extraClasses.add(Property.class);
@@ -55,13 +58,13 @@ public class MortgagesRobot {
         conf.addExtraClasses(extraClasses);
         conf.setMarshallingFormat(MarshallingFormat.JSON);
 
-        final KieServicesClient client = newKieServicesClient(conf);
+        var client = newKieServicesClient(conf);
         processClient = client.getServicesClient(ProcessServicesClient.class);
         tasksClient = client.getServicesClient(UserTaskServicesClient.class);
     }
 
     public static void main(String[] args) {
-        int i = TOTAL_PROCESSES;
+        var i = TOTAL_PROCESSES;
         while (i-- > 0) {
             new Thread(() -> {
                 try {
@@ -71,15 +74,14 @@ public class MortgagesRobot {
                 }
             }).start();
 
-        };
-
+        }
     }
 
     private static void randomMortgage() throws InterruptedException {
-        long started = System.currentTimeMillis();
-        boolean goodApplication = RANDOM.nextBoolean();
+        var started = System.currentTimeMillis();
+        var goodApplication = RANDOM.nextBoolean();
 
-        Long piid = startMortage(application(goodApplication));
+        var piid = startMortage(application(goodApplication));
         System.out.println("Started: " + piid);
 
         while (!goodApplication) {
@@ -91,19 +93,18 @@ public class MortgagesRobot {
 
         System.out.println("Validation sucessful for " + piid);
 
-        int chancesToInlimit = INITIAL_INLIMIT_CHANCES;
-        boolean completedTasks = false;
+        var chancesToInlimit = INITIAL_INLIMIT_CHANCES;
+        var completedTasks = false;
 
         while (!completedTasks) {
             // changes of pass inlimit increases after each interaction
-            final boolean inlimit = RANDOM.nextInt(100) <= chancesToInlimit;
+            var inlimit = RANDOM.nextInt(100) <= chancesToInlimit;
             tasksComplete(piid, singletonMap("inlimit", inlimit));
-
 
             if (!inlimit) {
                 System.out.println("Process not inlimit: " + piid + ". Chances to inlimit: " + chancesToInlimit);
                 // Rejects 80% of all requests
-                final boolean incdownpayment = RANDOM.nextInt(100) <= CHANCES_INCREASE_DOWNPYMT;
+                var incdownpayment = RANDOM.nextInt(100) <= CHANCES_INCREASE_DOWNPYMT;
                 tasksComplete(piid, singletonMap("incdownpayment", incdownpayment));
 
                 if (!incdownpayment) {
@@ -121,7 +122,7 @@ public class MortgagesRobot {
         tasksComplete(piid, emptyMap(), 2000);
         iteractionSleep();
 
-        System.out.println("Process Finished: " + piid + ". Time: " + secondsPassed(started) );
+        System.out.println("Process Finished: " + piid + ". Time: " + secondsPassed(started));
     }
 
     private static long secondsPassed(long currentTime) {
@@ -129,9 +130,7 @@ public class MortgagesRobot {
     }
 
     private static Long startMortage(Application app) {
-        return processClient.startProcess(CONTAINER,
-                                          PROCESSID,
-                                          singletonMap("application", app));
+        return processClient.startProcess(CONTAINER, PROCESSID, singletonMap("application", app));
     }
 
     private static Application application(boolean good) {
@@ -139,16 +138,16 @@ public class MortgagesRobot {
     }
 
     private static Application badApplication() {
-        Application application = goodApplication();
+        var application = goodApplication();
         application.setDownpayment(0);
         return application;
 
     }
 
     private static Application goodApplication() {
-        Applicant applicant = new Applicant("John", 100000, "John's street", 123456, 200000);
-        Property prop = new Property(5, "Property address", "Urban", 300000);
-        Application app = new Application();
+        var applicant = new Applicant("John", 100000, "John's street", 123456, 200000);
+        var prop = new Property(5, "Property address", "Urban", 300000);
+        var app = new Application();
 
         app.setApplicant(applicant);
         app.setProperty(prop);
@@ -163,10 +162,7 @@ public class MortgagesRobot {
     }
 
     private static void tasksComplete(Long piid, Map<String, Object> params, int min) {
-        List<TaskSummary> tasks = tasksClient.findTasksByStatusByProcessInstanceId(piid,
-                                                                                   emptyList(),
-                                                                                   0,
-                                                                                   100);
+        var tasks = tasksClient.findTasksByStatusByProcessInstanceId(piid, emptyList(), 0, 100);
         tasks.forEach(t -> {
             try {
                 iteractionSleep(min);
@@ -180,7 +176,6 @@ public class MortgagesRobot {
                 System.exit(0);
             }
         });
-
     }
 
     private static void iteractionSleep() throws InterruptedException {
@@ -190,7 +185,7 @@ public class MortgagesRobot {
     private static void iteractionSleep(int min) throws InterruptedException {
         iteractionSleep(min, MAX_TIME_BETWEEN_ITERATIONS);
     }
-    
+
     private static void iteractionSleep(int min, int maxTime) throws InterruptedException {
         Thread.sleep(min + RANDOM.nextInt(maxTime));
     }
