@@ -41,7 +41,8 @@
     </extensions>
     <system-properties>
 		<!--  Kie Server configuration  -->
-		<property name="dashbuilder.runtime.multi" value="true"/>
+	    <property name="dashbuilder.runtime.multi" value="true"/>
+	    <property name="dashbuilder.components.enable" value="true"/>
     </system-properties>
     <management>
         <security-realms>

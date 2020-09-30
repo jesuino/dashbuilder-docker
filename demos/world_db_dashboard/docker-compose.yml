@@ -19,6 +19,7 @@ services:
     volumes:
       - ./overlay/modules/system/layers/base/org/mariadb/main/:/opt/jboss/wildfly/modules/system/layers/base/org/mariadb/main:z
       - ./overlay/standalone/configuration/:/opt/jboss/wildfly/standalone/configuration:z
+      - ./overlay/dashbuilder/components:/tmp/dashbuilder/components:z
     ports:
       - 8080:8080
     depends_on:
