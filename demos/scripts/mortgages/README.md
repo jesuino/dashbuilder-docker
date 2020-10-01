@@ -16,6 +16,6 @@ Use `jbang MortgagesRobot.java`
 If you want to modify the code you may want to use VSCode and jbang:
 
 ~~~
-code `jbang edit MortgagesRobot.java`
+jbang edit --open=code MortgagesRobot.java
 ~~~
 
