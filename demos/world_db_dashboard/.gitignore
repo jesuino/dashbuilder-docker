@@ -1,0 +1,4 @@
+overlay/dashbuilder/components/*
+overlay/standalone/configuration/standalone_xml_history/*
+
+!overlay/dashbuilder/components/README.md 
