@@ -11,7 +11,7 @@ services:
     ports:
       - 3306:3306
   dashbuilder_authoring:
-    image: "quay.io/wsiqueir/dashbuilder-webapp:latest"
+    image: "quay.io/wsiqueir/dashbuilder-webapp:7.9"
     environment:
       - DB_CONNECTION_URL=jdbc:mariadb://db:3306/world
       - DB_USER=root
