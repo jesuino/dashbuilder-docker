@@ -16,6 +16,8 @@ services:
       - DB_CONNECTION_URL=jdbc:mariadb://db:3306/world
       - DB_USER=root
       - DB_PASSWORD=admin
+      - JAVA_OPTS=$JAVA_OPTS -Dfile.encoding=UTF-8
+      - LANG=en_US.UTF-8
     volumes:
       - ./overlay/modules/system/layers/base/org/mariadb/main/:/opt/jboss/wildfly/modules/system/layers/base/org/mariadb/main:z
       - ./overlay/standalone/configuration/:/opt/jboss/wildfly/standalone/configuration:z
@@ -30,7 +32,7 @@ services:
       - DB_CONNECTION_URL=jdbc:mariadb://db:3306/world
       - DB_USER=root
       - DB_PASSWORD=admin
-      - JAVA_OPTS=$JAVA_OPTS -Ddashbuilder.components.dir=/tmp/runtime/components
+      - JAVA_OPTS=$JAVA_OPTS -Ddashbuilder.components.dir=/tmp/runtime/components -Dfile.encoding=UTF-8
     volumes:
       - ./overlay/modules/system/layers/base/org/mariadb/main/:/opt/jboss/wildfly/modules/system/layers/base/org/mariadb/main:z
       - ./overlay/standalone/configuration/:/opt/jboss/wildfly/standalone/configuration:z
