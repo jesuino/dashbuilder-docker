@@ -4,10 +4,11 @@ services:
   jbpm-server:
     build: ./../custom_images/jbpm-server
     environment:
-      - JAVA_OPTS=-Xms2g -Xmx2g -XX:MetaspaceSize=512M -XX:MaxMetaspaceSize=512m -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=$JBOSS_MODULES_SYSTEM_PKGS -Djava.awt.headless=true -Ddashbuilder.components.enable=true
+      - JAVA_OPTS=-Xms2g -Xmx2g -XX:MetaspaceSize=512M -XX:MaxMetaspaceSize=512m -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=$JBOSS_MODULES_SYSTEM_PKGS -Djava.awt.headless=true -Ddashbuilder.components.enable=true -Ddashbuilder.export.dir=/tmp/dashbuilder/models -Ddashbuilder.runtime.location=http://localhost:8280
     ports: 
      - 8080:8080
     volumes:
+      - ./models:/tmp/dashbuilder/models:z
       - ./components:/tmp/dashbuilder/components:z
   dashbuilder-runtime:
     build: ./../custom_images/dashbuilder-runtime

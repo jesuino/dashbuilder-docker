@@ -44,10 +44,10 @@
     <system-properties>
 
 	<!-- Demo Kie Server configuration -->    
-        <property name="dashbuilder.kieserver.serverTemplate.sample_kie_server.location" value="http://jbpm-server:8080/kie-server/services/rest/server"/>
-        <property name="dashbuilder.kieserver.serverTemplate.sample_kie_server.user" value="kieserver"/>
-        <property name="dashbuilder.kieserver.serverTemplate.sample_kie_server.password" value="kieserver1!"/>
-	<property name="dashbuilder.kieserver.serverTemplate.sample_kie_server.replace_query" value="true"/>
+        <property name="dashbuilder.kieserver.serverTemplate.sample-server.location" value="http://jbpm-server:8080/kie-server/services/rest/server"/>
+        <property name="dashbuilder.kieserver.serverTemplate.sample-server.user" value="kieserver"/>
+        <property name="dashbuilder.kieserver.serverTemplate.sample-server.password" value="kieserver1!"/>
+	<property name="dashbuilder.kieserver.serverTemplate.sample-server.replace_query" value="true"/>
 	<property name="dashbuilder.components.enable" value="true"/>
     </system-properties>
 
