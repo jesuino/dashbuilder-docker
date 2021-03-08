@@ -4,7 +4,7 @@ services:
   dashbuilder-runtime:
     build: ./dashbuilder-runtime-dev
     environment:
-      - JAVA_OPTS=$JAVA_OPTS -Ddashbuilder.runtime.multi=true -Ddashbuilder.components.dir=/tmp/runtime/components -Ddashbuilder.components.enable=true -Ddashbuilder.dataset.partition=false -Ddashbuilder.dev=true
+      - JAVA_OPTS=$JAVA_OPTS -Ddashbuilder.runtime.multi=true -Ddashbuilder.components.dir=/tmp/runtime/components -Ddashbuilder.components.enable=true -Ddashbuilder.dataset.partition=false -Ddashbuilder.dev=true -Dfile.encoding=UTF-8
     volumes:
       - ./models:/tmp/dashbuilder/models:z
     ports: 
