@@ -10,6 +10,7 @@ import org.kie.dashbuilder.dashboards.BrazilFuelPriceDashboard;
 import org.kie.dashbuilder.dashboards.NavigationWithMultiplePages;
 import org.kie.dashbuilder.dashboards.PokemonDashboard;
 import org.kie.dashbuilder.dashboards.PopulationExample;
+import org.kie.dashbuilder.dashboards.SimpleExternalComponent;
 
 public class DashboardGeneratorRunner {
 
@@ -24,7 +25,8 @@ public class DashboardGeneratorRunner {
         List.of(new PokemonDashboard(),
                 new BrazilFuelPriceDashboard(),
                 new PopulationExample(),
-                new NavigationWithMultiplePages())
+                new NavigationWithMultiplePages(),
+                new SimpleExternalComponent())
             .forEach(g -> {
                 Path dashboardPath = Paths.get(baseUrl, g.name() + ".zip");
                 System.out.println(dashboardPath);
