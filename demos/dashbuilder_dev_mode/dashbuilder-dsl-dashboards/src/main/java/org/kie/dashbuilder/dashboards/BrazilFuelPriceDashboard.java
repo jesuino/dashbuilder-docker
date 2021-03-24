@@ -9,6 +9,7 @@ import org.dashbuilder.dataset.def.DataSetDefFactory;
 import org.dashbuilder.dataset.group.AggregateFunctionType;
 import org.dashbuilder.dataset.sort.SortOrder;
 import org.dashbuilder.displayer.DisplayerSubType;
+import org.dashbuilder.dsl.factory.page.PageFactory;
 import org.dashbuilder.dsl.model.Column;
 import org.dashbuilder.dsl.model.Dashboard;
 import org.kie.dashbuilder.DashboardGenerator;
@@ -43,10 +44,10 @@ public class BrazilFuelPriceDashboard implements DashboardGenerator {
                 (title, type) -> columnBuilder("1",
                                                displayer(newLineChartSettings().subType_SmoothLine()
                                                                                .dataset(fuelData.getUUID())
-                                                                               .width(260)
+                                                                               .width(320)
                                                                                .height(200)
                                                                                .title(title)
-                                                                               .margins(0, 0, 20, 0)
+                                                                               .margins(0, 0, 30, 0)
                                                                                .titleVisible(true)
                                                                                .yAxisShowLabels(false)
                                                                                .filterOn(false, false, true)
@@ -57,21 +58,28 @@ public class BrazilFuelPriceDashboard implements DashboardGenerator {
                                                                                .filter(equalsTo("TYPE", type))
                                                                                .format(YEAR, "Ano", "#")
                                                                                .buildSettings()))
-                                                                                                 .property("width", "270px")
+                                                                                                 .property("width", "330px")
                                                                                                  .build();
 
         var page = pageBuilder("Visão Geral").property("margin-left", "20px")
+                                             .property("width", "1200px")
                                              .rows(
                                                    row("<h1>Preço dos Combustíveis</h1>"),
                                                    row("<hr />"),
-                                                   row("<h2>Resumo</h2>"),
-                                                   row(displayer(newSelectorSettings().subtype(DisplayerSubType.SELECTOR_DROPDOWN)
-                                                                                      .multiple(false)
-                                                                                      .dataset(fuelData.getUUID())
-                                                                                      .filterOn(false, true, false)
-                                                                                      .group("STATE")
-                                                                                      .column("STATE")
-                                                                                      .buildSettings())),
+                                                   row("<h3>Variação</h3>"),
+                                                   row(PageFactory.columnBuilder()
+                                                                  .component(displayer(newSelectorSettings().subtype(DisplayerSubType.SELECTOR_DROPDOWN)
+                                                                                                            .multiple(false)
+                                                                                                            .dataset(fuelData.getUUID())
+                                                                                                            .titleVisible(true)
+                                                                                                            .title("Filtrar por estado")
+                                                                                                            .filterOn(false, true, false)
+                                                                                                            .group("STATE")
+                                                                                                            .column("STATE")
+                                                                                                            .buildSettings()))
+                                                                  .property("float", "right")
+                                                                  .build()),
+
                                                    row(priceColumn.apply("Gasolina", "GASOLINA"),
                                                        priceColumn.apply("Diesel", "DIESEL"),
                                                        priceColumn.apply("Etanol", "ETANOL"),
@@ -81,9 +89,11 @@ public class BrazilFuelPriceDashboard implements DashboardGenerator {
                                                    row("<h2>Todos dados</h2>"),
                                                    row(displayer(newTableSettings().dataset(fuelData.getUUID())
                                                                                    .buildSettings())),
-                                                   row("<em> Generated at " + new Date() + "</em>")).build();
+                                                   row("<em> Generated at " + new Date() + "</em>"))
+                                             .build();
 
-        return dashboard(List.of(page), List.of(fuelData));
+        return dashboard(List.of(page),
+                         List.of(fuelData));
     }
 
     @Override
