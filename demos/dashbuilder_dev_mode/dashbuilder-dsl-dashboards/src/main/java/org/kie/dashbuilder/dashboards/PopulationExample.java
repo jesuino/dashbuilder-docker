@@ -40,7 +40,7 @@ public class PopulationExample implements DashboardGenerator {
                                                                .column("Population")
                                                                .buildSettings();
         Page page = page("Countries Population",
-                         row("<h3> Countries Population test</h3>"),
+                         row("<h3> Countries Population</h3>"),
                          row(ComponentFactory.displayer(populationBar)));
 
         Navigation navigation = navigation(group("Countries Information", item(page)));

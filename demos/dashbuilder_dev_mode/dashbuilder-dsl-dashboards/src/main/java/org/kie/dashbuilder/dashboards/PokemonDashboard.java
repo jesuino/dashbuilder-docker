@@ -32,7 +32,7 @@ public class PokemonDashboard implements DashboardGenerator {
                                          .quoteChar('"')
                                          .buildDef();
         var page = page("Pokemons Example",
-                        row("<h1>Pokemon Dashboard</h1>"),
+                        row("<h1>Pokemon Dashboard - HEllo TDC</h1>"),
                         row("<hr />"),
                         row("<h3>All Data</h3>"),
                         row(displayer(newTableSettings().tableColumnPickerEnabled(false)

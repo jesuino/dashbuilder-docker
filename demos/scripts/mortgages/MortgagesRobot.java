@@ -37,9 +37,9 @@ public class MortgagesRobot {
     private static final int CHANCES_INCREASE_DOWNPYMT = 80;
 
     private static final String URL = "http://localhost:8080/kie-server/services/rest/server";
-    private static final String USER = "kieserver";
-    private static final String PASSWORD = "kieserver1!";
-    private static final String CONTAINER = "mortgage";
+    private static final String USER = "krisv";
+    private static final String PASSWORD = "krisv";
+    private static final String CONTAINER = "mortgage-process_1.0.0-SNAPSHOT";
     private static final String PROCESSID = "Mortgage_Process.MortgageApprovalProcess";
     private static final Random RANDOM = new Random();
     private static final int MAX_TIME_BETWEEN_ITERATIONS = 1000;

@@ -72,7 +72,7 @@ public class BrazilFuelPriceDashboard implements DashboardGenerator {
                                                                                                             .multiple(false)
                                                                                                             .dataset(fuelData.getUUID())
                                                                                                             .titleVisible(true)
-                                                                                                            .title("Filtrar por estado")
+                                                                                                            .title("SELECIONE ESTADO")
                                                                                                             .filterOn(false, true, false)
                                                                                                             .group("STATE")
                                                                                                             .column("STATE")
