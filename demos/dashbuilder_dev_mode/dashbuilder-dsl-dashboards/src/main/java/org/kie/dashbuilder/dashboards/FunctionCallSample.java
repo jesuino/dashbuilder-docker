@@ -14,14 +14,13 @@ import static org.dashbuilder.dsl.factory.dashboard.DashboardFactory.dashboard;
 import static org.dashbuilder.dsl.factory.page.PageFactory.page;
 import static org.dashbuilder.dsl.factory.page.PageFactory.row;
 
-public class SimpleExternalComponent implements DashboardGenerator {
+public class FunctionCallSample implements DashboardGenerator {
 
     @Override
     public Dashboard build() {
-
         var componentsDir = this.getClass().getResource("/components").getFile();
 
-        Component externalComponent = externalBuilder("very-simple").cssProperty(CssProperty.HEIGHT, "500px")
+        Component externalComponent = externalBuilder("function-call").cssProperty(CssProperty.HEIGHT, "500px")
                                                                     .build();
         Page p1 = page("Page 1",
                        row(externalComponent));
@@ -31,7 +30,7 @@ public class SimpleExternalComponent implements DashboardGenerator {
 
     @Override
     public String name() {
-        return "SimpleExternalComponent";
+        return "FunctionTest";
     }
 
 }

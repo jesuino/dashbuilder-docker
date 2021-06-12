@@ -7,7 +7,7 @@
   <version>0.0.1-SNAPSHOT</version>
 
   <properties>
-    <dashbuilder.dsl.version>7.52.0-SNAPSHOT</dashbuilder.dsl.version>
+    <dashbuilder.dsl.version>7.54.0.Final</dashbuilder.dsl.version>
     <maven.compiler.target>11</maven.compiler.target>
     <maven.compiler.source>11</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

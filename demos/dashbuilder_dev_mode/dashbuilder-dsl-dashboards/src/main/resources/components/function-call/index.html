@@ -1,0 +1,48 @@
+Function Name <input type="text" id="functionName" /><button
+  onclick="callFunction()"
+>
+  Call Function
+</button>
+
+<h3>Result:</h3>
+
+<p id="result"></p>
+
+<script type="text/javascript">
+  let id = "";
+  window.addEventListener("message", receiveMessage, false);
+
+  function receiveMessage(event) {
+    const message = event.data;
+    const type = message.type;
+
+    if (type === "INIT") {
+      id = message.properties.get("component_id");
+      console.log("INIT Received. Component ID: " + id);
+    }
+
+    if (type === "FUNCTION_RESPONSE") {
+      const response = message.properties.get("functionResponse");
+
+      document.getElementById("result").innerHTML = `
+            <b>Type:</b> ${response.resultType} <br />
+            <b>Message:</b> ${response.message} <br />
+            <b>Result:</b> ${response.result} <br />
+        `;
+    }
+    console.log(message);
+  }
+
+  function callFunction() {
+    const props = new Map();
+    props.set("component_id", id);
+    props.set("functionCallRequest", {
+      functionName: document.getElementById("functionName").value,
+      parameters: new Map(),
+    });
+    window.parent.postMessage({
+      type: "FUNCTION_CALL",
+      properties: props,
+    });
+  }
+</script>

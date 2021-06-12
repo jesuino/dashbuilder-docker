@@ -1,13 +1,9 @@
 package org.kie.dashbuilder.dashboards;
 
 import org.dashbuilder.dataset.ColumnType;
-import org.dashbuilder.dataset.DataSet;
-import org.dashbuilder.displayer.DisplayerSettings;
 import org.dashbuilder.dsl.factory.component.ComponentFactory;
 import org.dashbuilder.dsl.factory.dashboard.DashboardBuilder;
 import org.dashbuilder.dsl.model.Dashboard;
-import org.dashbuilder.dsl.model.Navigation;
-import org.dashbuilder.dsl.model.Page;
 import org.kie.dashbuilder.DashboardGenerator;
 
 import static java.util.Arrays.asList;
@@ -23,27 +19,27 @@ public class PopulationExample implements DashboardGenerator {
 
     @Override
     public Dashboard build() {
-        DataSet dataSet = newDataSetBuilder().column("Country", ColumnType.LABEL)
-                                             .column("Population", ColumnType.NUMBER)
-                                             .row("Brazil", "211")
-                                             .row("United States", "328")
-                                             .row("Cuba", "11")
-                                             .row("India", "1366")
-                                             .row("China", "1398")
-                                             .buildDataSet();
+        var dataSet = newDataSetBuilder().column("Country", ColumnType.LABEL)
+                                         .column("Population", ColumnType.NUMBER)
+                                         .row("Brazil", "211")
+                                         .row("United States", "328")
+                                         .row("Cuba", "11")
+                                         .row("India", "1366")
+                                         .row("China", "1398")
+                                         .buildDataSet();
 
-        DisplayerSettings populationBar = newBarChartSettings().subType_Column()
-                                                               .width(800)
-                                                               .height(600)
-                                                               .dataset(dataSet)
-                                                               .column("Country")
-                                                               .column("Population")
-                                                               .buildSettings();
-        Page page = page("Countries Population",
-                         row("<h3> Countries Population</h3>"),
-                         row(ComponentFactory.displayer(populationBar)));
+        var populationBar = newBarChartSettings().subType_Column()
+                                                 .width(800)
+                                                 .height(600)
+                                                 .dataset(dataSet)
+                                                 .column("Country")
+                                                 .column("Population")
+                                                 .buildSettings();
+        var page = page("Countries Population",
+                        row("<h3> Countries Population</h3>"),
+                        row(ComponentFactory.displayer(populationBar)));
 
-        Navigation navigation = navigation(group("Countries Information", item(page)));
+        var navigation = navigation(group("Countries Information", item(page)));
 
         return DashboardBuilder.newBuilder(asList(page))
                                .navigation(navigation)

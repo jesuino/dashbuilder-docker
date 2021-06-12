@@ -15,7 +15,7 @@ import org.kie.dashbuilder.DashboardGenerator;
 import static org.dashbuilder.dsl.factory.page.PageFactory.page;
 import static org.dashbuilder.dsl.factory.page.PageFactory.row;
 
-public class TDCDemo implements DashboardGenerator {
+public class TDCDemoDashboard implements DashboardGenerator {
 
     @Override
     public Dashboard build() {
