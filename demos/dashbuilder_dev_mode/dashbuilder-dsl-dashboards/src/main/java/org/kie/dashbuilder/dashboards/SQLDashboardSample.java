@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.dashbuilder.dataset.group.AggregateFunctionType;
 import org.dashbuilder.dataset.sort.SortOrder;
-import org.dashbuilder.displayer.DisplayerSettingsFactory;
 import org.dashbuilder.dsl.factory.dashboard.DashboardBuilder;
 import org.dashbuilder.dsl.factory.page.PageFactory;
 import org.dashbuilder.dsl.model.Dashboard;
@@ -13,13 +12,14 @@ import org.kie.dashbuilder.DashboardGenerator;
 import static java.util.Arrays.asList;
 import static org.dashbuilder.dataset.def.DataSetDefFactory.newSQLDataSetDef;
 import static org.dashbuilder.displayer.DisplayerSettingsFactory.newBarChartSettings;
+import static org.dashbuilder.displayer.DisplayerSettingsFactory.newMetricSettings;
 import static org.dashbuilder.displayer.DisplayerSettingsFactory.newSelectorSettings;
 import static org.dashbuilder.displayer.DisplayerSettingsFactory.newTableSettings;
 import static org.dashbuilder.dsl.factory.component.ComponentFactory.displayer;
 import static org.dashbuilder.dsl.factory.page.PageFactory.columnBuilder;
 import static org.dashbuilder.dsl.factory.page.PageFactory.row;
 
-public class SQLSample implements DashboardGenerator {
+public class SQLDashboardSample implements DashboardGenerator {
 
     @Override
     public Dashboard build() {
@@ -29,12 +29,11 @@ public class SQLSample implements DashboardGenerator {
 
         final String dataSourceName = "sample";
 
-        var orders =
-                newSQLDataSetDef().uuid("orders")
-                                  .name("orders")
-                                  .dataSource(dataSourceName)
-                                  .dbTable("orders", true)
-                                  .buildDef();
+        var orders = newSQLDataSetDef().uuid("orders")
+                                       .name("orders")
+                                       .dataSource(dataSourceName)
+                                       .dbTable("orders", true)
+                                       .buildDef();
 
         var daysorder = newSQLDataSetDef().uuid("daysorder")
                                           .dataSource(dataSourceName)
@@ -45,20 +44,15 @@ public class SQLSample implements DashboardGenerator {
                                        .dataSource(dataSourceName)
                                        .dbTable("agents", true)
                                        .buildDef();
-        
-        
-        var templateForMetric = "<h4><strong>${title}:</strong> ${value}</h4>";
-        
-        
-        var ordersSum = DisplayerSettingsFactory.newMetricSettings()
-                                                .dataset(orders.getUUID())
-                                                .title("Orders Amount Total")
-                                                .titleVisible(true)
-                                                .filterOn(false, false, true)
-                                                .column("ord_amount", AggregateFunctionType.SUM)
-                                                .htmlTemplate(templateForMetric)
-                                                .buildSettings();
-        
+
+        var ordersSum = newMetricSettings().dataset(orders.getUUID())
+                                           .title("Orders Amount Total")
+                                           .titleVisible(true)
+                                           .filterOn(false, false, true)
+                                           .column("ord_amount", AggregateFunctionType.SUM)
+                                           .htmlTemplate("<h4><strong>${title}:</strong> ${value}</h4>")
+                                           .buildSettings();
+
         var agentFilter = newSelectorSettings().subType_Labels()
                                                .dataset(agents.getUUID())
                                                .group("agent_code")
@@ -110,7 +104,7 @@ public class SQLSample implements DashboardGenerator {
         var page = PageFactory.pageBuilder("Order")
                               .property("margin-left", "220px")
                               .rows(row("<h3>Orders Amount by Agent</h3>"),
-                                    
+
                                     row(displayer(agentFilter)),
                                     row("<hr />"),
                                     row(displayer(ordersSum)),
@@ -123,8 +117,8 @@ public class SQLSample implements DashboardGenerator {
                                                        .build()),
                                     row("<h3>Agent Data</h3>"),
                                     row(columnBuilder().component(displayer(agentsDataTable))
-                                        .property("width", "1200px")
-                                        .build()))
+                                                       .property("width", "1200px")
+                                                       .build()))
                               .build();
 
         return DashboardBuilder.newBuilder(asList(page))
