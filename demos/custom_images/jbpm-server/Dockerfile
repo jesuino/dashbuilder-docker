@@ -1,4 +1,4 @@
-FROM jboss/jbpm-server-full:7.48.0.Final
+FROM jboss/jbpm-server-full:7.52.0.Final
 
 # Users
 ADD ./conf/users.properties /opt/jboss/wildfly/standalone/configuration/
